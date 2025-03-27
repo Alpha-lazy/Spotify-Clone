@@ -14,7 +14,6 @@ import Login from "./Login";
 import { useData } from "./DataContext";
 import Signup from "./Signup";
 import Search from "./Search";
-import Generate_Playlist from "./Generate_Playlist";
 
 function RouterContent() {
   const { setSong } = useData();
@@ -49,7 +48,6 @@ function RouterContent() {
           <Route path="/search/artist" element={<Artist />} />
 
 
-          <Route path="/generate" element={<Generate_Playlist />} />
 
         </Routes>
       </div>
