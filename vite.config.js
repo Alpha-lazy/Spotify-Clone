@@ -10,9 +10,10 @@ export default defineConfig({
     },
     hmr: true, // Enable HMR properly instead of disabling it
   },
-  build: {
-    watch: {
-      exclude: ["**/target/**"],
-    },
-  },
+  // build: {
+  //   watch: {
+  //     exclude: ["**/target/**"],
+  //   },
+  // },
+  build: { outDir: 'dist' }
 });
