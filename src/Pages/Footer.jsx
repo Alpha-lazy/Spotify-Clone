@@ -33,6 +33,21 @@ function Footer() {
     setIndex(0);
   }, [suggestion]);
 
+  function updateMediaSessionMetadata(title,artist,album,artworkUrl) {
+      if ('mediaSession' in navigator) {
+         navigator.mediaSession.metadata = new MediaMetadata({
+          title:title || "Unknown Title",
+          artist: `${artist[0].name},${artist[2].name}`|| "Unknown Artist",
+          album:album || "Unknown Album",
+          artwork:[
+            {src:artworkUrl[0].url,sizes:artworkUrl[0].quality,type:"image/jpg"},
+            {src:artworkUrl[1].url,sizes:artworkUrl[1].quality,type:"image/jpg"},
+            {src:artworkUrl[2].url,sizes:artworkUrl[2].quality,type:"image/jpg"}
+          ]
+         })
+      } 
+  }
+
   const getdownloadAudio = async() => {
     const options = {method: 'GET', url: `https://jiosavan-api2.vercel.app/api/songs/${songId}`};
     try {
@@ -41,6 +56,13 @@ function Footer() {
        audio.src = data.data[0].downloadUrl[4].url
          audio.load()
          audio.play()
+         let title = data.data[0].name;
+         let artist = data.data[0].artists.all;
+         let album = data.data[0].album.name
+         let artworkUrl = data.data[0].image;
+         updateMediaSessionMetadata(title,artist,album,artworkUrl)
+        
+         
         //  let {download} =  await axios.request(options)
 
         // if (audio.played) {  
@@ -54,6 +76,7 @@ function Footer() {
           
         //   setDownloadAudio(await download.blob())
         // }  
+
     } catch (error) {
       console.error(error);
     }
@@ -164,6 +187,7 @@ function Footer() {
     getdownloadAudio() 
   }, songId);
 
+
   function next() {
     if (suggestion !== undefined && index < suggestion.length) {
       let next = index + 1;
@@ -174,7 +198,8 @@ function Footer() {
         setCurrentSong([suggestion[next]]);
 
         setSongId(suggestion[next].id);
-        let src = suggestion[next].downloadUrl[4].url;
+       
+        // let src = suggestion[next].downloadUrl[4].url;
         // audio.src = src;
         // audio.play();
       } else {
@@ -187,6 +212,8 @@ function Footer() {
       document.getElementById("player-button").style.cursor = "not-allowed";
     }
   }
+
+ 
 
   function pause() {
     if (audio.paused) {
@@ -267,6 +294,16 @@ function Footer() {
     toast.success('Downloaded Successfully')
   }
 
+  // handle metadata 
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.setActionHandler('nexttrack',()=>{
+      next()
+    })
+    navigator.mediaSession.setActionHandler('previoustrack',()=>{
+      prev()
+    })
+  }
   return (
     <>
       <footer
