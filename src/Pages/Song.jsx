@@ -856,7 +856,28 @@ function Song() {
                                       </div>
                                     </div>
                                     <div id="close_dropdown">
-                                      <button
+                                    <button
+                                        onClick={() => {
+                                          toggleDropdown(data.id);
+                                        }}
+                                        style={{
+                                          width: "70px",
+                                          height: "40px",
+                                          border:"none",
+                                          backgroundColor:"transparent",
+                                          borderRadius:"25px",
+                                          color:"white",
+                                          fontSize:"15px",
+                                          fontWeight:"bold",
+                                          cursor:"pointer"
+                                        }}
+                                      >
+                                        Cancle
+                                      </button>
+
+                                      {
+                                       AddplaylistId.length !== 0 ?
+                                       (<button
                                         onClick={() => {
                                           toggleDropdown(data.id);
                                           addthesongs(
@@ -873,11 +894,19 @@ function Song() {
                                           borderRadius:"25px",
                                           color:"black",
                                           fontSize:"15px",
-                                          fontWeight:"bold"
+                                          fontWeight:"bold",
+                                          cursor:"pointer"
                                         }}
                                       >
                                         Add
                                       </button>
+                                      )
+                                       :
+                                       (
+                                        <div></div>
+                                       )
+                                       
+                                      }
                                     </div>
                                   </div>
                                 )}

@@ -23,15 +23,15 @@ function Header() {
     navigate(0);
   };
 
-  function debounce(func, delay) {
-    let timeoutId;
-    return function(...args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
-    };
-  }
+  // function debounce(func, delay) {
+  //   let timeoutId;
+  //   return function(...args) {
+  //     clearTimeout(timeoutId);
+  //     timeoutId = setTimeout(() => {
+  //       func.apply(this, args);
+  //     }, delay);
+  //   };
+  // }
 
   function handleOnSearch (query) {
     if ( query.trim().length !== 0) {
@@ -49,7 +49,15 @@ function Header() {
     }
   };
 
-  const debouncedSearch = debounce(handleOnSearch, 1000);
+  // const debouncedSearch = debounce(handleOnSearch, 1000);
+
+  useEffect(()=>{
+   document.getElementById("serach-input").addEventListener("keypress",(e)=>{
+    if (e.key === 'Enter') {
+      handleOnSearch(document.getElementById("serach-input").value)
+   }
+  })
+  },[])
 
   
 
@@ -62,9 +70,11 @@ function Header() {
         alignItems: "center",
       }}
     >
+      <NavLink to="/">
       <div className="logo" style={{ width: "300px" }}>
         <img src={image} width="130px" height="40px" alt="" />
       </div>
+      </NavLink>
       <div className="search" style={{ display: "flex", gap: "20px" }}>
         <div>
           <NavLink to="/">
@@ -109,8 +119,13 @@ function Header() {
             width: "450px",
             backgroundColor: "#1f1f1f",
           }}
+          id="serach-input"
           className="serach-box"
-          onInput={(e)=>{debouncedSearch(e.target.value)}}
+          onInput={(e)=>{
+            if(e.target.value.trim().length ==0){
+                 navigate("/")
+            }
+        }}
           // onChange={}
         />
       </div>

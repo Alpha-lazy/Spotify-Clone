@@ -325,7 +325,7 @@ function Footer() {
           id="songName"
           style={{
             display: "flex",
-            width: "250px",
+            width: "370px",
             maxHeight: "80px",
             alignItems: "center",
             gap: "10px",
@@ -521,7 +521,7 @@ function Footer() {
         </div>
         <div
           className="Controller"
-          style={{ width: "250px",display:"flex",marginRight:"10px",height:"100%",justifyContent:"space-evenly",alignItems:"center"}}
+          style={{ width: "370px",display:"flex",marginRight:"10px",height:"100%",justifyContent:"space-evenly",alignItems:"center"}}
         >
           <div style={{position:"relative"}}>
             {currentSong?<button  style={{border:"none",backgroundColor:"transparent",cursor:"pointer"}} onClick={()=>{download(currentSong[0].downloadUrl[4].url, currentSong[0].name)}} className="download">

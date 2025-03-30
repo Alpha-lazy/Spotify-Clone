@@ -136,16 +136,16 @@ function Playlist_track() {
           )
           .catch(console.error);
       }
-      // else if (playlistData !== undefined && playlistData.songs.length !==0) {
-      //   getAverageColor(`${playlistData.songs.length !==0?playlistData.songs[0].image[2].url:""}`, 4)
-      //   .then(
-      //     (color) =>
-      //       (document.getElementById(
-      //         "playlistInfo"
-      //       ).style.background = `linear-gradient(to bottom, ${color.rgb}, transparent)`)
-      //   )
-      //   .catch(console.error);
-      // }
+      else if (playlistData !== undefined && playlistData.songs.length !==0) {
+        getAverageColor(`${playlistData.songs.length !==0?playlistData.songs[0].image[2].url:""}`, 4)
+        .then(
+          (color) =>
+            (document.getElementById(
+              "playlistInfo"
+            ).style.background = `linear-gradient(to bottom, ${color.rgb}, transparent)`)
+        )
+        .catch(console.error);
+      }
     }
 
     //   if (playlistData !== undefined && playlistData.songs.length !==0) {
@@ -463,7 +463,7 @@ function Playlist_track() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  height: "260px",
+                  height: "265px",
                   gap: "20px",
                 }}
               >
@@ -473,12 +473,12 @@ function Playlist_track() {
                   playlistData.songs !== undefined ? (
                     // && playlistData.songs.length  >=4
                     <img
-                      width="200px"
+                      width="225px"
                       style={{
                         borderRadius: "5px",
                         boxShadow: "black 0px 0px 14px 0px",
                       }}
-                      height="200px"
+                      height="225px"
                       // src={playlistData.playlistId ===undefined?playlistData.image[2].url:playlistData !==undefined? playlistData.songs[0].image[2].url:""}
                       src={playlistData.image[2].url}
                       alt=""
