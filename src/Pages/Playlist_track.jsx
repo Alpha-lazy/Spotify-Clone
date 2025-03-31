@@ -136,7 +136,7 @@ function Playlist_track() {
           )
           .catch(console.error);
       }
-      else if (playlistData !== undefined && playlistData.songs.length !==0) {
+      else if (playlistData !== undefined && playlistData.songs[0] !==undefined) {
         getAverageColor(`${playlistData.songs.length !==0?playlistData.songs[0].image[2].url:""}`, 4)
         .then(
           (color) =>

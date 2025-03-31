@@ -87,7 +87,7 @@ function Faverate() {
     let element = document.getElementById("dynamicDiv");
     let fevoritecont = document.getElementById("fevoritecont");
     if (element.style.width === "75px") {
-      element.style.width = "600px";
+      element.style.width = "350px";
       // document.getElementById("libHeader").style.justifyContent = "left";
       document.getElementById("libHeader").style.justifyContent =
         "space-between";
@@ -105,6 +105,10 @@ function Faverate() {
       document.querySelectorAll("#fevinfo").forEach((element) => {
         element.style.display = "flex";
       });
+      document.querySelectorAll("#fevCard").forEach((element) => {
+        element.style.padding = "8px";
+      });
+     
     } else {
       element.style.width = "75px";
 
@@ -114,7 +118,7 @@ function Faverate() {
       document.getElementById("libHeader").style.height = "95px";
       document.getElementById("libHeader").style.paddingTop = "18px";
       // document.getElementById("libHeader").style.paddingLeft = "0px";
-      document.getElementById("fevoritecont").style.padding = "0px 0px";
+      document.getElementById("fevoritecont").style.padding = "0px 10px";
       document.getElementById("bt-label").style.display = "none";
       document.getElementById("creatbt-label").style.display = "none";
       document.getElementById("create").classList.remove("create");
@@ -125,6 +129,10 @@ function Faverate() {
       document.querySelectorAll("#fevinfo").forEach((element) => {
         element.style.display = "none";
       });
+      document.querySelectorAll("#fevCard").forEach((element) => {
+        element.style.padding = "5px";
+      });
+    
     }
   }
 
@@ -616,7 +624,7 @@ function Faverate() {
                         fevPlaylisttrack(data.id, data.url, data.songCount);
                       }}
                       style={{
-                        marginTop: "5px",
+                        marginTop: "3px",
                         display: "flex",
                         alignItems: "center",
                         justifyContent:"center",
@@ -627,15 +635,15 @@ function Faverate() {
                     >
                       <img
                         src={data.imageUrl}
-                        style={{ borderRadius: "5px" }}
-                        width="50px"
-                        height="50px"
+                        style={{ borderRadius: "3px" }}
+                        width="55px"
+                        height="55px"
                         alt=""
                       />
                       <div id="fevinfo" style={{ height: "100%" }}>
                         <div
                           style={{
-                            width: "300px",
+                            width: "255px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -685,7 +693,7 @@ function Faverate() {
                         // setLoading(true)
                       }}
                       style={{
-                        marginTop: "5px",
+                        marginTop: "3px",
                         display: "flex",
                         width:"100%",
                         alignItems: "center",
@@ -703,21 +711,21 @@ function Faverate() {
                                     display: "grid",
                                     gridTemplateColumns: "repeat(2, 1fr)",
                                     gridTemplateRows: "repeat(2, 1fr)",
-                                    width: "50px",
-                                    height: "50px",
+                                    width: "55px",
+                                    height: "55px",
                                     gap: "0px",
                                     overflow: "hidden",
-                                    borderRadius: "5px",
+                                    borderRadius: "3px",
                                   }
                                 : {
                                     display: "grid",
                                     gridTemplateColumns: "repeat(1, 1fr)",
                                     gridTemplateRows: "repeat(1, 1fr)",
-                                    width: "50px",
-                                    height: "50px",
+                                    width: "55px",
+                                    height: "55px",
                                     gap: "0px",
                                     overflow: "hidden",
-                                    borderRadius: "5px",
+                                    borderRadius: "3px",
                                   }
                             }
                           >
@@ -794,7 +802,7 @@ function Faverate() {
                       <div id="fevinfo" style={{ height: "100%" }}>
                         <div
                           style={{
-                            width: "300px",
+                            width: "255px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
