@@ -158,7 +158,7 @@ function Faverate() {
           setLoading(true);
           setPlaylistData([]);
           setPlaylistData(await responce.data.data);
-          navigate("/playlist/track");
+          navigate(`/playlist/track/${id}`);
         });
     } catch (error) {
       console.log(error);
@@ -167,11 +167,11 @@ function Faverate() {
     }
   };
 
-  useEffect(() => {
-    if (playlistData) {
-      setLoading(true);
-    }
-  }, [playlistData]);
+  // useEffect(() => {
+  //   if (playlistData) {
+  //     setLoading(true);
+  //   }
+  // }, [playlistData]);
 
   // Create playlist
 
@@ -351,7 +351,7 @@ function Faverate() {
               // setLoading(true)
             })
             .then(() => {
-              navigate("/playlist/track");
+              navigate(`/playlist/track/${playlistId}`);
               setLoading(true);
             });
 
@@ -365,7 +365,7 @@ function Faverate() {
           playlistId: playlistId,
           songs: [],
         });
-        navigate("/playlist/track");
+        navigate(`/playlist/track/${playlistId}`);
         setLoading(true);
       }
 
@@ -620,8 +620,11 @@ function Faverate() {
                           : ""
                       }`}
                       onClick={() => {
-                        // setLoading(false)
-                        fevPlaylisttrack(data.id, data.url, data.songCount);
+                        setLoading(false);
+                        navigate(`/playlist/track/${data.id}`)
+                        setLoading(true);
+                        // fevPlaylisttrack(data.id, data.url, data.songCount);
+                        
                       }}
                       style={{
                         marginTop: "3px",
@@ -684,12 +687,14 @@ function Faverate() {
                           : ""
                       }`}
                       onClick={() => {
-                        PrivatePlaylisttrack(
-                          data.name,
-                          data.desc,
-                          data.playlistId,
-                          data.songs
-                        );
+                        // PrivatePlaylisttrack(
+                        //   data.name,
+                        //   data.desc,
+                        //   data.playlistId,
+                        //   data.songs
+                        // );
+                        setLoading(false);
+                        navigate(`/playlist/track/${data.playlistId}`)
                         // setLoading(true)
                       }}
                       style={{

@@ -70,9 +70,11 @@ function Playlist() {
   };
 
   const playlist_track = (id, link, limit) => {
-    RetrivePlaylist(id, link, limit);
-
-    navigate("/playlist/track");
+    // RetrivePlaylist(id, link, limit);
+    setLoading(false)
+    navigate(`/playlist/track/${id}`);
+    // setPlaylistData([])
+    setLoading(false)
   };
 
   const paly_playlist = async (id, link, limit) => {
@@ -242,7 +244,10 @@ function Playlist() {
                         >
                           <div
                             onClick={() => {
-                              playlist_track(data.id, data.url, data.songCount);
+                              // playlist_track(data.id, data.url, data.songCount);
+                              setLoading(false)
+                              setPlaylistData([])
+                              navigate(`/playlist/track/${data.id}`)
                             }}
                           >
                             <div className="card-img">

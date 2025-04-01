@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useData } from "./DataContext";
 import toast from "react-hot-toast";
@@ -31,17 +31,100 @@ function Playlist_track() {
     imageUrl: "",
   });
   const [fontSize, setFontSize] = useState(40);
+  const {playlistId} = useParams();
   const navigate = useNavigate();
   // const[loader,setLoader] = useState(false)
 
+    const RetrivePlaylist = async (id,limit) => {
+      setLoading(false);
+      // setPlaylistData([])
+      await axios
+        // .get("https://saavn.dev/api/playlists", {
+        .get("https://jiosavan-api2.vercel.app/api/playlists", {
+          params: {
+            id: id,
+            limit:400
+          },
+        })
+        .then(async (responce) => {
+          setPlaylistData([]);
+          setPlaylistData(await responce.data.data);
+  
+          setLoading(true);
+        });
+    };
+
+     const RetrivePrivatePlaylisttrack = async (  playlistId) => {
+        // let array = songs
+        setLoading(false);
+        await axios({
+          method: "get",
+          url: `https://authentication-seven-umber.vercel.app/api/playlist${playlistId}`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }).then((response) => {
+          // toast.success(response.data.message, { duration: 2000 });
+          let array = response.data.playlist[0].songs;
+    
+          if (array.length !== 0) {
+            array.forEach(async (id) => {
+              await axios
+                .get(`https://jiosavan-api2.vercel.app/api/songs/${id}`)
+                .then(async (responce) => {
+                  let index = array.indexOf(id);
+                  array.splice(index, 1, await responce.data.data[0]);
+                  setPlaylistData([]);
+                  let data = {
+                    name: response.data.playlist[0].name,
+                    desc: response.data.playlist[0].desc,
+                    playlistId: playlistId,
+                    songs: array,
+                  };
+                  setPlaylistData(data);
+                  setSong(data.songs);
+                  // setLoading(true)
+                })
+                .then(() => {
+                  // navigate(`/playlist/track/${playlistId}`);
+                  // setLoading(true);
+                });
+    
+              //  playlistData({name:name,desc:desc,playlistId:playlistId,songs:[]})
+              //  console.log(playlistId,songs);
+            });
+          } else {
+            setPlaylistData({
+              name: response.data.playlist[0].name,
+              desc: response.data.playlist[0].desc,
+              playlistId: playlistId,
+              songs: [],
+            });
+            // navigate(`/playlist/track/${playlistId}`);
+            // setLoading(true);
+          }
+    
+          // setFevroite([])
+        });
+      };
+
+    useEffect(()=>{
+      
+      RetrivePlaylist(playlistId);
+      RetrivePrivatePlaylisttrack(playlistId)
+      
+    },[playlistId])
   useEffect(() => {
     if (playlistData) {
       let songs = playlistData.songs;
       setPlaylistTrack(songs);
       setSong(songs);
+      
       if (playlistData.playlistId !== undefined) {
         setLoading(true);
       }
+     
 
       // setLoading(true)
     }
@@ -142,7 +225,7 @@ function Playlist_track() {
           (color) =>
             (document.getElementById(
               "playlistInfo"
-            ).style.background = `linear-gradient(to bottom, ${color.rgb}, transparent)`)
+            ).style.background = `linear-gradient(to bottom,${color.rgb}, transparent)`)
         )
         .catch(console.error);
       }
@@ -611,7 +694,7 @@ function Playlist_track() {
 
                     <div
                       style={{
-                        color: "rgb(127,127,127)",
+                        color: "rgb(226 223 223)",
                         fontSize: "14px",
                         marginTop: "-7px",
                       }}
@@ -629,14 +712,17 @@ function Playlist_track() {
                     >
                       <li
                         style={{
-                          color: "rgb(127,127,127)",
+                          color: "rgb(226 223 223)",
                           fontSize: "14px",
                           marginTop: "10px",
                         }}
                       >
-                        {playlistData.songCount !== undefined
+                        {
+                         
+                       playlistData.songCount !== undefined
                           ? playlistData.songCount + " songs"
-                          : playlistData.songs.length + " songs"}
+                          : playlistData.songs.length + " songs"
+                        }
                       </li>
                       {!playlistData.playlistId  ? (
                         <div>

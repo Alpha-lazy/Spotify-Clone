@@ -51,8 +51,10 @@ function Footer() {
   const getdownloadAudio = async() => {
     const options = {method: 'GET', url: `https://jiosavan-api2.vercel.app/api/songs/${songId}`};
     try {
+   
+    
       const { data } = await axios.request(options);
-      // console.log(data.data[0].downloadUrl[4].url);
+      console.log(data.data[0].downloadUrl[4].url);
        audio.src = data.data[0].downloadUrl[4].url
          audio.load()
          audio.play()
@@ -76,6 +78,7 @@ function Footer() {
           
         //   setDownloadAudio(await download.blob())
         // }  
+      
 
     } catch (error) {
       console.error(error);
@@ -185,7 +188,7 @@ function Footer() {
       }
     }
     getdownloadAudio() 
-  }, songId);
+  },[songId]);
 
 
   function next() {

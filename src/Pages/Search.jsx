@@ -120,30 +120,31 @@ function Search() {
     fetchPlaylist();
   }, [search]);
 
-  const RetrivePlaylist = async (id, link, limit) => {
-    setLoading(false);
-    await axios
-      // .get("https://saavn.dev/api/playlists", {
-      .get("https://jiosavan-api2.vercel.app/api/playlists", {
-        params: {
-          id: id,
-          link: link,
-          page: 1,
-          limit: limit,
-        },
-      })
-      .then(async (responce) => {
-        setPlaylistData([]);
-        setPlaylistData(await responce.data.data);
+  // const RetrivePlaylist = async (id, link, limit) => {
+  //   setLoading(false);
+  //   await axios
+  //     // .get("https://saavn.dev/api/playlists", {
+  //     .get("https://jiosavan-api2.vercel.app/api/playlists", {
+  //       params: {
+  //         id: id,
+  //         link: link,
+  //         page: 1,
+  //         limit: limit,
+  //       },
+  //     })
+  //     .then(async (responce) => {
+  //       setPlaylistData([]);
+  //       setPlaylistData(await responce.data.data);
 
-        setLoading(true);
-      });
-  };
+  //       setLoading(true);
+  //     });
+  // };
 
   const playlist_track = (id, link, limit) => {
-    RetrivePlaylist(id, link, limit);
-
-    navigate("/playlist/track");
+    // RetrivePlaylist(id, link, limit);
+    setLoading(false);
+    setPlaylistData([])
+    navigate(`/playlist/track/${id}`);
   };
 
   // Search artist

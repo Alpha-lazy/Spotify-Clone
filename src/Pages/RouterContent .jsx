@@ -38,7 +38,7 @@ function RouterContent() {
           <Route path="/" element={<Home />} />
           <Route path="/song" element={<Song />} />
           <Route path="/playlist" element={<Playlist />} />
-          <Route path="/playlist/track" element={<Playlist_track />} />
+          <Route path="/playlist/track/:playlistId" element={<Playlist_track />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/artist/track" element={<Artist_track />} />
 

@@ -200,9 +200,9 @@ idRef.current = id;
   };
 
   const playlist_track = (id, link, limit) => {
-    RetrivePlaylist(id, link, limit);
+    // RetrivePlaylist(id, link, limit);
 
-    navigate("/playlist/track");
+    navigate(`/playlist/track/${id}`);
   };
 
   // Search artist
@@ -437,7 +437,7 @@ idRef.current = id;
                                  cursor: "pointer",
                                }}
 
-                               onClick={()=>{RetriveTrendingSongs().then(()=>{navigate('/playlist/track')})}}>
+                               onClick={()=>{navigate('/playlist/track/6689255')}}>
                         
                                 Show all
                               </button>
@@ -466,9 +466,9 @@ idRef.current = id;
                                   >
                                     <div
                                       onClick={() => {
-                                        setSongId(data.id)
-                                        RetriveTrendingSongs(data.id).then(()=>{setLoading(true)})
-                                        RetriveSuggestion(data.id)
+                                        setSongId(data.id);
+                                        RetriveTrendingSongs(data.id).then(()=>{setLoading(true)});
+                                        RetriveSuggestion(data.id);
                                         
                                       }}
                                     >
