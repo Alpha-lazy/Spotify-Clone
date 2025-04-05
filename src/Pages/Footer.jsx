@@ -54,8 +54,7 @@ function Footer() {
    
     
       const { data } = await axios.request(options);
-      console.log(data.data[0].downloadUrl[4].url);
-       audio.src = data.data[0].downloadUrl[4].url
+       audio.src = data.data[0].downloadUrl[3].url
          audio.load()
          audio.play()
          let title = data.data[0].name;
