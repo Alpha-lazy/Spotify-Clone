@@ -219,16 +219,16 @@ function Playlist_track() {
           )
           .catch(console.error);
       }
-      else if (playlistData !== undefined && playlistData.songs[0] !==undefined) {
-        getAverageColor(`${playlistData.songs.length !==0?playlistData.songs[0].image[2].url:""}`, 4)
-        .then(
-          (color) =>
-            (document.getElementById(
-              "playlistInfo"
-            ).style.background = `linear-gradient(to bottom,${color.rgb}, transparent)`)
-        )
-        .catch(console.error);
-      }
+      // else if (playlistData !== undefined && playlistData.songs[0] !==undefined) {
+      //   getAverageColor(`${playlistData.songs.length !==0?playlistData.songs[0].image[2].url:""}`, 4)
+      //   .then(
+      //     (color) =>
+      //       (document.getElementById(
+      //         "playlistInfo"
+      //       ).style.background = `linear-gradient(to bottom,${color.rgb}, transparent)`)
+      //   )
+      //   .catch(console.error);
+      // }
     }
 
     //   if (playlistData !== undefined && playlistData.songs.length !==0) {
